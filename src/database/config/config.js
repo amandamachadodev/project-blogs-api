@@ -8,7 +8,7 @@ const suffix = {
   test: '-test',
 };
 
-// 'iniciando o projeto'
+// 'iniciando o projeto!'
 
 const options = {
   host: process.env.HOSTNAME || process.env.MYSQL_HOST || 'localhost',
