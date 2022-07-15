@@ -18,7 +18,7 @@ const authService = {
 
   login: async (email, password) => {
     const user = await db.User.findOne({ 
-      attributes: { exclude: ['phone', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['id', 'displayName', 'image'] },
       where: { email }, 
     });
 
