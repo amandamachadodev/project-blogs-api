@@ -9,7 +9,7 @@ const authService = {
       where: { email }, 
     });
 
-    if (!user || user.passwordHash !== password) {
+    if (!user || user.password !== password) {
       return false;
     }
 
