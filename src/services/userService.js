@@ -1,23 +1,21 @@
-const Joi = require('joi');
-const db = require('../database/models/user');
+require('express-async-errors');
+const { User } = require('../database/models');
 
 const usersService = {
-  validateBody: (data) => {
-    const schema = Joi.object({
-      email: Joi.string().required(),
-      password: Joi.string().required().min(6),
+
+  create: async ({ displayName, email, password, image }) => {
+    const user = await User.findOne({ 
+      attributes: { exclude: ['id', 'displayName', 'password', 'image', 'createdAt', 'updatedAt'] },
+      where: { email }, 
     });
+    console.log(user);
+    if (!user) {
+      const newUser = await User.create({ displayName, email, password, image });
+      console.log(newUser);
+      return true;
+    }
 
-    const { error, value } = schema.validate(data);
-
-    if (error) throw error;
-
-    return value;
-  },
-
-  create: async ({ email, password }) => {
-    const user = await db.User.create({ email, password });
-    return user;
+    return false;
   },
 
 };
