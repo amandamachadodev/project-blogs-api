@@ -2,22 +2,25 @@ require('express-async-errors');
 const { User } = require('../database/models');
 
 const usersService = {
-
   create: async ({ displayName, email, password, image }) => {
     const user = await User.findOne({ 
-      attributes: { exclude: ['id', 'displayName', 'password', 'image', 'createdAt', 'updatedAt'] },
+      attributes: { exclude: ['id', 'displayName', 'password', 'image'] },
       where: { email }, 
     });
-    console.log(user);
+
     if (!user) {
-      const newUser = await User.create({ displayName, email, password, image });
-      console.log(newUser);
+      await User.create({ displayName, email, password, image });
       return true;
     }
 
     return false;
   },
-
+  list: async () => {
+    const users = await User.findAll({
+      attributes: ['id', 'displayName', 'email', 'image'],
+    });
+    return users;
+  },
 };
 
 module.exports = usersService;

@@ -26,11 +26,13 @@ const usersController = {
 
     if (newUser === false) return res.status(409).json({ message: 'User already registered' });
 
-    if (newUser === true) {
     const token = await authService.login(email, password);
 
     return res.status(201).json({ token });
-    }
+  },
+  list: async (req, res) => {
+    const users = await userService.list();
+    res.status(200).json(users);
   },
 };
 
