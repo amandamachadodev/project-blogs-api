@@ -13,10 +13,6 @@ const Category = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
-//  Catgerory.associate = (models) => {
-//    Catgerory.hasMany(models.PostCategories,{ foreignKey: 'categoryId', as: 'PostCategories' });
-//  };
-
   return Category;
 };
 
