@@ -1,5 +1,4 @@
 const authService = require('../services/authService');
-const jwtService = require('../services/jwtService');
 
 const authController = {
   login: async (req, res) => {
@@ -16,14 +15,6 @@ const authController = {
     if (token === false) return res.status(400).json({ message: 'Invalid fields' });
 
     return res.status(200).json({ token });
-  },
-
-  validateToken: (req, res, next) => {
-    const { authorization } = req.headers;
-
-    jwtService.validateToken(authorization);
-
-    next();
   },
 };
 

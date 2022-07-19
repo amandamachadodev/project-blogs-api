@@ -17,6 +17,11 @@ const postService = {
     });
     return post;
   },
+  update: async (id, title, content) => {
+    const [post] = await BlogPost.update({ title, content }, {
+      where: { id } });
+    return post;
+  },
 };
 
 module.exports = postService;
